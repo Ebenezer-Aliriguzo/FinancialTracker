@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Tracker</title>
+</head>
+<body>
+    <h1>Financial Tracker</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+        <h2>Transactions</h2>
+        <ul>
+            {% for transaction in transactions %}
+                <li>{{ transaction.date }} - {{ transaction.description }} - ${{ transaction.amount }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_transaction' %}">Add Transaction</a>
+    {% else %}
+        <p>You are not logged in. <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+</body>
+</html>
